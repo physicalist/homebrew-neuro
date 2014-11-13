@@ -43,7 +43,13 @@ class Genesis < Formula
   end
 
   test do
-    system "#{bin}/nxgenesis"
+    (testpath).install "#{prefix}/startup/.simrc"
+
+    (testpath/"test.g").write <<-EOS.undent
+       quit
+    EOS
+
+    system "#{bin}/nxgenesis", "#{testpath}/test.g"
   end
 end
 __END__
