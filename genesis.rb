@@ -31,18 +31,19 @@ class Genesis < Formula
                           "--disable-silent-rules",
                           "--prefix=#{prefix}"
 
+    # build: always install X-less version, without GUI
+    system "make", "nxgenesis"
+    system "make", "nxinstall"
+
+    # also build X11-supported gui version (requires Xquartz!)
     if build.with? :x11
-      system "make"
+      system "make", "genesis"
       system "make", "install"
-    else
-      # build special version without GUI
-      system "make", "nxgenesis"
-      system "make", "nxinstall"
     end
   end
 
   test do
-    system "#{bin}/genesis"
+    system "#{bin}/nxgenesis"
   end
 end
 __END__
