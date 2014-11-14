@@ -3,9 +3,9 @@ require "formula"
 class Genesis < Formula
   # description "GENESIS is the GEneral NEural SImulator Suite"
   homepage "http://genesis-sim.org/GENESIS"
-  url "https://github.com/physicalist/genesis2.4gamma/archive/v2.4-rc2.tar.gz"
-  sha1 "1e28893a22436e333d3917a5fc35dc346475bd08"
-  version "2.4-rc2"
+  url "https://github.com/physicalist/genesis2.4gamma/archive/v2.4.tar.gz"
+  sha1 "915299eac0955d4f74a14a7582a6e3b6e4274394"
+  version "2.4"
 
   head "https://github.com/physicalist/genesis2.4gamma.git" #, :using => :git
 
