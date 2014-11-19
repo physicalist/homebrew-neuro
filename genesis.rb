@@ -51,6 +51,13 @@ class Genesis < Formula
 
     system "#{bin}/nxgenesis", "#{testpath}/test.g"
   end
+
+  def caveats; <<-EOS.undent
+    The `convert` utility for model conversion from genesis-1.4 to genesis-2.0
+    format was renamed to `genconvert` to avoid a naming conflict with
+    ImageMagick
+    EOS
+  end
 end
 __END__
 diff --git a/src/Makefile.BASE b/src/Makefile.BASE
