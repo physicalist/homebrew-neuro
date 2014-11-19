@@ -14,12 +14,27 @@ class Nest < Formula
   option "enable-openmpi", "Use OpenMPI"
 
   fails_with :clang do
-    build 500
+    build 600
     cause <<-EOS.undent
-      Build will fail due to missing implementation of OpenMP standard in Clang.
-      As a workaround, use --without-openmp as build parameter, or rather, use
-      GCC as preferred compiler.
-      EOS
+      Building with Clang in Xcode 6.0 fails in randomgen.cpp:30:3:
+      Trying to access private constructor in STL's iterator
+      > error: field of type 'std::vector<double>::const_iterator'
+      > (aka '__wrap_iter<const_pointer>') has private constructor
+      > next_(0),
+      > ^
+    EOS
+  end
+
+  fails_with :llvm do
+    build 600
+    cause <<-EOS.undent
+      Fails in randomgen.cpp:30:3:
+      Trying to access private constructor in STL's iterator
+      > error: field of type 'std::vector<double>::const_iterator'
+      > (aka '__wrap_iter<const_pointer>') has private constructor
+      > next_(0),
+      > ^
+     EOS
   end
 
   depends_on :python => :recommended
@@ -46,7 +61,7 @@ class Nest < Formula
 
   test do
     # simple check whether NEST was compiled & linked
-    #system "#{bin}/nest", "--version"
+    system "#{bin}/nest", "--version"
 
     # use pyNEST's built-in test suite
     python do
@@ -55,8 +70,8 @@ class Nest < Formula
   end
 
   def caveats; <<-EOS.undent
-    Attention: Clang does not support OpenMP!
-    Building NEST with Clang will fail unless brewed with --without-openmp!"
+    Clang does not support OpenMP!
+    Building NEST with Clang enforces --without-openmp!"
     EOS
   end
 end
