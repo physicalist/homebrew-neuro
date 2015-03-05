@@ -4,8 +4,8 @@ require 'formula'
 
 class Nest < Formula
   homepage 'http://www.nest-initiative.org'
-  url 'http://www.nest-initiative.org/download/gplreleases/nest-2.4.2.tar.gz'
-  sha1 '86da83c9747c898e63d00a2f99159700a68d8b36'
+  url 'http://www.nest-initiative.org/download/gplreleases/nest-2.6.0.tar.gz'
+  sha1 'ca7023c3a0ecb914ed2467d5d29265b0'
 
   option "without-python", "Do not build python bindings (saves some time but not recommended; pyNN wouldn't work, among other things)"
   option "without-gsl", "Don't use Gnu scientific library (GSL) for extended numerical possibilites (NOT recommended, WILL break some neuron models)"
@@ -37,6 +37,7 @@ class Nest < Formula
      EOS
   end
 
+  depends_on "readline"
   depends_on :python => :recommended
   depends_on "gsl" => :recommended
   depends_on "open-mpi" if build.include? 'enable-openmpi'
